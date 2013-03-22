@@ -40,7 +40,7 @@ angular.module('mobile-navigate').factory('$change', ['$q', '$rootScope', functi
     //Convert a preset (eg 'modal') to its array of preset classes if it exists
     //else, just convert eg 'slide' to ['slide', 'slide'], so both elements get it
     //The array layout is [nextinationClass, prevClass]
-    transition = transitionPresets[transType] ?
+    var transition = transitionPresets[transType] ?
       transitionPresets[transType] : 
       [transType, transType];
 
@@ -233,7 +233,7 @@ function($rootScope, $compile, $controller, $route, $change) {
     scope.$on('$pageTransitionStart', function transitionStart($event, dest, source, reverse) {
       function changePage() {
         insertPage(dest);
-        transition = reverse ? source.transition() : dest.transition();
+        var transition = reverse ? source.transition() : dest.transition();
         //If the page is marked as reverse, reverse the direction (lol)
         if (dest.reverse() || ($route.current && $route.current.$route.reverse)) {
           reverse = !reverse;
